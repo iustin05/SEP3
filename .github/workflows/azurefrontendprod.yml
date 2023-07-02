@@ -27,14 +27,14 @@ jobs:
         working-directory: ./frontend
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.FRONTEND_PROD}}/frontendapp
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/frontendapp
         working-directory: ./frontend
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: .frontend-app
-          path: ${{env.FRONTEND_PROD}}/frontendapp
+          path: ${{env.DOTNET_ROOT}}/frontendapp
 
   deploy:
     runs-on: ubuntu-latest
