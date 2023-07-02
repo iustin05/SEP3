@@ -27,14 +27,14 @@ jobs:
         working-directory: ./backend
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.BACKEND_PROD}}/backendapp
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/backendapp
         working-directory: ./backend
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: .backend-app
-          path: ${{env.BACKEND_PROD}}/backendapp
+          path: ${{env.DOTNET_ROOT}}/backendapp
 
   deploy:
     runs-on: ubuntu-latest
