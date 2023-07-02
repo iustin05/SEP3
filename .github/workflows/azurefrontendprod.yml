@@ -24,9 +24,11 @@ jobs:
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
+        working-directory: ./frontend
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.FRONTEND_PROD}}/frontendapp
+        working-directory: ./frontend
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
