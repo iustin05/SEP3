@@ -20,10 +20,10 @@ jobs:
           dotnet-version: 7.0.x
       - name: Restore dependencies
         run: dotnet restore
-        working-directory: ./frontend
+        working-directory: ./backend
       - name: Build
         run: dotnet build --no-restore
-        working-directory: ./frontend
+        working-directory: ./backend
   test:
     runs-on: ubuntu-latest
     steps:
@@ -34,10 +34,10 @@ jobs:
           dotnet-version: 7.0.x
       - name: Restore dependencies
         run: dotnet restore
-        working-directory: ./frontend
+        working-directory: ./backend
       - name: Build
         run: dotnet build --no-restore
-        working-directory: ./frontend
+        working-directory: ./backend
       - name: Test
         run: dotnet test --no-build --verbosity normal
-        working-directory: ./frontend
+        working-directory: ./backend
