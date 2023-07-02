@@ -1,0 +1,12 @@
+#file: noinspection YAMLSchemaValidation
+frontend:
+  - frontend/**
+
+backend:
+  - backend/**
+
+devops:
+  - .github/**
+
+spring:
+  - middleware/**
