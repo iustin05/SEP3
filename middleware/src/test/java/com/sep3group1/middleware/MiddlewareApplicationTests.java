@@ -6,11 +6,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class MiddlewareApplicationTests {
     @Test
-    public void applicationContextLoaded() {
+    void applicationContextLoaded() {
     }
 
     @Test
-    public void applicationContextTest() {
+    void applicationContextTest() {
         MiddlewareApplication.main(new String[] {});
     }
 }

@@ -6,11 +6,13 @@ name: Frontend .NET Testing
 on:
   pull_request:
     branches: [ "main" ]
+    types: [ labeled ]
   push:
     branches: [ "main" ]
 
 jobs:
   build-test:
+    if: ${{ github.event.label.name == 'blazor' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
