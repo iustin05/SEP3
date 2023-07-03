@@ -1,4 +1,4 @@
-name: Deploy Backend on Azure
+name: Backend Deployment
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    name: Build .NET Ubuntu Latest
+    name: Build Artifacts
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2

@@ -1,35 +1,26 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
-name: Middleware Java Testing
+name: Middleware Tests
 
 on:
   pull_request:
     branches: [ "main" ]
-  push:
-    branches: [ "main" ]
 
 jobs:
   tests:
-    name: JUnit5 Unit Tests
+    name: Test JUnit5
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           java-version: 17
           distribution: 'zulu'
-
       - name: Cache Maven packages
-        #This action allows caching dependencies and build outputs to improve workflow execution time.
         uses: actions/cache@v3
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      #Run Tests
       - name: Run Tests
         run: mvn -B test
         working-directory: ./middleware
@@ -39,15 +30,12 @@ jobs:
     needs: tests
     steps:
       - uses: actions/checkout@v1
-
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           java-version: 17
           distribution: 'zulu'
-
       - name: Cache Maven packages
-        #This action allows caching dependencies and build outputs to improve workflow execution time.
         uses: actions/cache@v3
         with:
           path: ~/.m2
