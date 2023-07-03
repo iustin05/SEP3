@@ -42,7 +42,7 @@ jobs:
     runs-on: windows-latest
     needs: build
     environment:
-      name: 'Production'
+      name: 'Frontend Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
