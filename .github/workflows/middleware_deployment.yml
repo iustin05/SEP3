@@ -1,8 +1,6 @@
 name: Middleware Java Testing
 
 on:
-  pull_request:
-    branches: [ "main" ]
   push:
     branches: [ "main" ]
 
