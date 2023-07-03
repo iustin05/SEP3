@@ -1,56 +1,43 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Production - Build & Deploy Backend to Azure
+name: Deploy Backend on Azure
 
 on:
   push:
-#    tags:
-#      - 'v[0-9]+.[0-9]+.[0-9]+'
-    branches:
-      - main
-  workflow_dispatch:
+    branches: [ "main" ]
 
 jobs:
   build:
+    name: Build .NET Ubuntu Latest
     runs-on: windows-latest
-
     steps:
       - uses: actions/checkout@v2
-
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '7.x'
           include-prerelease: true
-
       - name: Build with dotnet
         run: dotnet build --configuration Release
         working-directory: ./backend
-
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/backendapp
         working-directory: ./backend
-
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: .backend-app
           path: ${{env.DOTNET_ROOT}}/backendapp
-
   deploy:
+    name: Deploy to Azure
     runs-on: windows-latest
     needs: build
     environment:
       name: 'Backend Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
           name: .backend-app
-
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
