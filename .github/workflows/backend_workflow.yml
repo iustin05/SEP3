@@ -31,6 +31,7 @@ jobs:
   codeql:
     name: CodeQL Static Code Analysis
     runs-on: windows-latest
+    needs: build-test
     steps:
       - uses: actions/checkout@v3
       - name: Setup .NET
