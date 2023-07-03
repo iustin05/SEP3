@@ -6,13 +6,11 @@ name: Middleware Java Testing
 on:
   pull_request:
     branches: [ "main" ]
-    types: [ labeled ]
   push:
     branches: [ "main" ]
 
 jobs:
   tests:
-    if: ${{ github.event.label.name == 'spring' }}
     name: JUnit5 Unit Tests
     runs-on: ubuntu-latest
     steps:
