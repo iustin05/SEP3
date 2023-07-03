@@ -53,7 +53,7 @@ jobs:
               - uses: security-extended
               - uses: security-and-quality
       - name: Build .NET Code
-        run: dotnet build --no restore
+        run: dotnet build --no-restore
         working-directory: ./backend
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
