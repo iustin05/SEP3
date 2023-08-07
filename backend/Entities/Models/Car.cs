@@ -10,21 +10,21 @@ namespace Entities.Models
         public int Id { get; set; }
 
         [Required]
-        public string Model { get; set; }
+        public required string Model { get; set; }
 
-        public string Manufacturer { get; set; }
+        public required string Manufacturer { get; set; }
 
         public int Year { get; set; }
 
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public required Category Category { get; set; }
 
         public bool IsAvailable { get; set; }
 
         [Column(TypeName = "decimal(10, 2)")]
         public decimal DailyRate { get; set; }
 
-        public string ImageUrl { get; set; }
+        public required string ImageUrl { get; set; }
     }
 }

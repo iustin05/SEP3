@@ -1,4 +1,3 @@
-using Entities.Contracts;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,7 +25,7 @@ public class CarDAOImplementation : ICarService
 
         public async Task<Car> GetCarById(int id)
         {
-            return await _context.Cars.FindAsync(id);
+            return await _context.Cars.FindAsync(id) ?? throw new Exception("Car not found");
         }
 
         public async Task UpdateCar(Car car)
@@ -37,7 +36,7 @@ public class CarDAOImplementation : ICarService
 
         public async Task DeleteCar(int id)
         {
-            var car = await _context.Cars.FindAsync(id);
+            var car = await _context.Cars.FindAsync(id) ?? throw new Exception("Car not found");
             _context.Cars.Remove(car);
             await _context.SaveChangesAsync();
         }

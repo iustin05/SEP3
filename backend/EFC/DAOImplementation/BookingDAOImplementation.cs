@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EFC.DAOImplementation;
 public class BookingDAOImplementation : IBookingService
+
     {
         private readonly DbAccess _context;
 
@@ -25,7 +26,8 @@ public class BookingDAOImplementation : IBookingService
 
         public async Task<Booking> GetBookingById(int id)
         {
-            return await _context.Bookings.FindAsync(id);
+            var booking = await _context.Bookings.FindAsync(id) ?? throw new Exception("Booking not found");
+            return booking;
         }
 
         public async Task UpdateBooking(Booking booking)
@@ -36,7 +38,7 @@ public class BookingDAOImplementation : IBookingService
 
         public async Task DeleteBooking(int id)
         {
-            var booking = await _context.Bookings.FindAsync(id);
+            var booking = await _context.Bookings.FindAsync(id) ?? throw new Exception("Booking not found");
             _context.Bookings.Remove(booking);
             await _context.SaveChangesAsync();
         }

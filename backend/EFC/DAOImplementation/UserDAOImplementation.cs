@@ -12,29 +12,39 @@ public class UserDAOImpl : IUserService {
     }
 
     public async Task<User> AddUser(User user) {
-        try {
-            Console.Write(user.FirstName);
-            EntityEntry<User> added = await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
-            return added.Entity;
-        }
-        catch (Exception e) {
-            throw new Exception("Username already exists");
-        }
+        Console.WriteLine("UserDAOImpl.AddUser");
+        Console.WriteLine(user);
+        await _context.Users.AddAsync(user);
+        await _context.SaveChangesAsync();
+        return user;
     }
 
     public async Task<User?> GetUser(string username) {
-        Block? block = await _context.Blocks.FirstOrDefaultAsync(block1 => block1.Username.Equals(username));
-        if (block != null) {
-            throw new Exception($"You have been blocked. \n Reason : {block.Reason}");
-        }
-
-
-        User? user = await _context.Users.FirstOrDefaultAsync(t => t.Username.Equals(username));
-        if (user == null) {
-            throw new Exception("Incorrect username");
-        }
-
+        User? user = await _context.Users.FirstOrDefaultAsync(t => t.Username.Equals(username)) ?? throw new Exception("Incorrect username");
         return user;
+    }
+
+    async Task IUserService.DeleteUser(int id) {
+        User user = await _context.Users.FindAsync(id) ?? throw new Exception("User not found");
+        _context.Users.Remove(user);
+        await _context.SaveChangesAsync();
+    }
+
+    async Task<List<User>> IUserService.GetAllUsers()
+    {
+        List<User> users = await _context.Users.ToListAsync() ?? throw new Exception("No users found");
+        return users;
+    }
+
+    async Task<User> IUserService.GetUserById(int id)
+    {
+        User user = await _context.Users.FindAsync(id) ?? throw new Exception("User not found");
+        return user;
+    }
+
+    Task IUserService.UpdateUser(User user)
+    {
+        _context.Entry(user).State = EntityState.Modified;
+        return _context.SaveChangesAsync();
     }
 }

@@ -1,4 +1,3 @@
-using Entities.Contracts;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,7 +25,7 @@ public class CustomerDAOImplementation : ICustomerService
 
         public async Task<Customer> GetCustomerById(int id)
         {
-            return await _context.Customers.FindAsync(id);
+            return await _context.Customers.FindAsync(id) ?? throw new Exception("Customer not found");
         }
 
         public async Task UpdateCustomer(Customer customer)
@@ -37,7 +36,7 @@ public class CustomerDAOImplementation : ICustomerService
 
         public async Task DeleteCustomer(int id)
         {
-            var customer = await _context.Customers.FindAsync(id);
+            var customer = await _context.Customers.FindAsync(id) ?? throw new Exception("Customer not found");
             _context.Customers.Remove(customer);
             await _context.SaveChangesAsync();
         }

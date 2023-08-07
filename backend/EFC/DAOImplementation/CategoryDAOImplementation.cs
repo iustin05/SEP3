@@ -1,4 +1,3 @@
-using Entities.Contracts;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,7 +25,7 @@ public class CategoryDAOImplementation : ICategoryService
 
         public async Task<Category> GetCategoryById(int id)
         {
-            return await _context.Categories.FindAsync(id);
+            return await _context.Categories.FindAsync(id) ?? throw new Exception("Category not found");
         }
 
         public async Task UpdateCategory(Category category)
@@ -37,7 +36,7 @@ public class CategoryDAOImplementation : ICategoryService
 
         public async Task DeleteCategory(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
+            var category = await _context.Categories.FindAsync(id) ?? throw new Exception("Category not found");
             _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
         }

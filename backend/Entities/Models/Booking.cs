@@ -11,11 +11,11 @@ namespace Entities.Models
 
         [ForeignKey(nameof(Customer))]
         public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
+        public required Customer Customer { get; set; }
 
         [ForeignKey(nameof(Car))]
         public int CarId { get; set; }
-        public Car Car { get; set; }
+        public required Car Car { get; set; }
 
         public DateTime PickupDate { get; set; }
 
