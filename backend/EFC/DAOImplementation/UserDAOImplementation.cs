@@ -13,7 +13,7 @@ public class UserDAOImpl : IUserService {
 
     public async Task<User> AddUser(User user) {
         Console.WriteLine("UserDAOImpl.AddUser");
-        Console.WriteLine(user);
+        Console.WriteLine(user.FirstName + " " + user.LastName + " " + user.Username + " " + user.Password);
         await _context.Users.AddAsync(user);
         await _context.SaveChangesAsync();
         return user;
