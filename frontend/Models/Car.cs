@@ -65,9 +65,6 @@ public class Car
     public required CarStatus Status { get; set; }
 
     public Rating? Ratings { get; set; }
-
-    [Required]
-    public required DateTime CreatedTime { get; set; }
 }
 
 public enum CarCategory
