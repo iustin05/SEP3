@@ -1,6 +1,6 @@
 using backend.Models;
 
-namespace backend.Contracts;
+namespace backend.EFC;
 
 public interface ICarDao {
     public Task<Car> AddCar(Car car);

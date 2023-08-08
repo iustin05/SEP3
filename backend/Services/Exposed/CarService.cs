@@ -1,14 +1,14 @@
-using backend.Contracts;
+using backend.EFC;
 using Backend.Grpc;
 using Grpc.Core;
 
-namespace backend.Services;
+namespace backend.Services.Exposed;
 
-public class CarService : CarGrpcService.CarGrpcServiceBase
+public class CarGrpcService : Backend.Grpc.CarGrpcService.CarGrpcServiceBase
 {
     private readonly ICarDao _carDao;
 
-    public CarService(ICarDao carDao)
+    public CarGrpcService(ICarDao carDao)
     {
         _carDao = carDao;
     }

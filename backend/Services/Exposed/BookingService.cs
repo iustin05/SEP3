@@ -1,14 +1,14 @@
-using backend.Contracts;
+using backend.EFC;
 using Backend.Grpc;
 using Grpc.Core;
 
-namespace backend.Services;
+namespace backend.Services.Exposed;
 
-public class BookingService : BookingGrpcService.BookingGrpcServiceBase
+public class BookingGrpcService : Backend.Grpc.BookingGrpcService.BookingGrpcServiceBase
 {
     private readonly IBookingDao _bookingDao;
 
-    public BookingService(IBookingDao bookingDao)
+    public BookingGrpcService(IBookingDao bookingDao)
     {
         _bookingDao = bookingDao;
     }

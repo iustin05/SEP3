@@ -1,4 +1,3 @@
-using backend.Contracts;
 using backend.Models;
 using Microsoft.EntityFrameworkCore;
 

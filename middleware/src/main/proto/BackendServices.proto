@@ -1,0 +1,126 @@
+syntax = "proto3";
+
+package backend.grpc;
+option java_multiple_files = false;
+option java_package = "com.sep3group1.middleware.Backend.Grpc";
+
+// Booking service
+service BookingGrpcService {
+  rpc AddBooking(Booking) returns (Booking);
+  rpc GetAllBookings(Empty) returns (Bookings);
+  rpc GetBookingById(IdRequest) returns (Booking);
+  rpc UpdateBooking(Booking) returns (Empty);
+  rpc DeleteBooking(IdRequest) returns (Empty);
+}
+
+// Car service
+service CarGrpcService {
+  rpc AddCar(Car) returns (Car);
+  rpc GetAllCars(Empty) returns (Cars);
+  rpc GetCarById(IdRequest) returns (Car);
+  rpc UpdateCar(Car) returns (Empty);
+  rpc DeleteCar(IdRequest) returns (Empty);
+}
+
+// User service
+service UserGrpcService {
+  rpc AddUser(User) returns (User);
+  rpc GetAllUsers(Empty) returns (Users);
+  rpc GetUserById(IdRequest) returns (User);
+  rpc UpdateUser(User) returns (Empty);
+  rpc DeleteUser(IdRequest) returns (Empty);
+}
+
+message Empty {}
+
+message IdRequest {
+  int32 id = 1;
+}
+
+// Message for Booking
+message Booking {
+  int32 id = 1;
+  int32 customerId = 2;
+  int32 carId = 3;
+  int32 totalPrice = 4;
+  string createdTime = 5;
+  string startTime = 6;
+  string endTime = 7;
+  BookingStatus status = 8;
+}
+
+enum BookingStatus {
+  PENDING = 0;
+  CANCELLED = 1;
+  IN_PROGRESS = 2;
+  COMPLETED = 3;
+}
+
+message Bookings {
+  repeated Booking bookings = 1;
+}
+
+// Message for Car
+message Car {
+  int32 id = 1;
+  string make = 2;
+  string model = 3;
+  string color = 4;
+  string fuel = 5;
+  string transmission = 6;
+  CarCategory category = 7;
+  int32 year = 8;
+  int32 mileage = 9;
+  int32 pricePerDay = 10;
+  string description = 11;
+  string image = 12;
+  string createdAt = 13;
+  string updatedAt = 14;
+  int32 numberOfSeats = 15;
+  int32 euroNorm = 16;
+  int32 horsePower = 17;
+  float fuelConsumption = 18;
+  int32 deposit = 19;
+  CarStatus status = 20;
+  repeated Rating ratings = 21;
+}
+
+enum CarCategory {
+  ECONOMY = 0;
+  STANDARD = 1;
+  LUXURY = 2;
+}
+
+enum CarStatus {
+  AVAILABLE = 0;
+  UNAVAILABLE = 1;
+  IN_SERVICE = 2;
+}
+
+message Cars {
+  repeated Car cars = 1;
+}
+
+// Message for Rating
+message Rating {
+  int32 userId = 3;
+  string comment = 4;
+  string createdTime = 5;
+  int32 numberOfStars = 6;
+}
+
+// Message for User
+message User {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+  string password = 4;
+  int32 accessLevel = 5;
+  string createdTime = 6;
+  int32 age = 7;
+}
+
+message Users {
+  repeated User users = 1;
+}
+

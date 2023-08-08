@@ -1,15 +1,14 @@
-using backend.Contracts;
+using backend.EFC;
 using Backend.Grpc;
 using Grpc.Core;
-// Assuming the IUserDao is in this namespace
 
-namespace backend.Services;
+namespace backend.Services.Exposed;
 
-public class UserService : UserGrpcService.UserGrpcServiceBase
+public class UserGrpcService : Backend.Grpc.UserGrpcService.UserGrpcServiceBase
 {
     private readonly IUserDao _userDao;
 
-    public UserService(IUserDao userDao)
+    public UserGrpcService(IUserDao userDao)
     {
         _userDao = userDao;
     }
@@ -22,7 +21,18 @@ public class UserService : UserGrpcService.UserGrpcServiceBase
 
     public override async Task<Users> GetAllUsers(Empty request, ServerCallContext context)
     {
-        var users = await _userDao.GetAllUsers();
+        // var users = await _userDao.GetAllUsers();
+        backend.Models.User user1 = new Models.User
+        {
+            CreatedTime = DateTime.Now,
+            Id = 0,
+            Name = "Alex",
+            Email = "alex@email.com",
+            Password = "39528572487589",
+            AccessLevel = 2,
+            Age = 23
+        };
+        var users = new List<backend.Models.User> { user1 };
         return new Users { Users_ = { users.Select(ConvertToMessage) } };
     }
 

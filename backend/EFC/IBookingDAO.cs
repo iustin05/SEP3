@@ -1,6 +1,6 @@
 using backend.Models;
 
-namespace backend.Contracts;
+namespace backend.EFC;
 
 public interface IBookingDao {
     public Task<Booking> AddBooking(Booking booking);

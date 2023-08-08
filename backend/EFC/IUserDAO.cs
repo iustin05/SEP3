@@ -1,6 +1,6 @@
 using backend.Models;
 
-namespace backend.Contracts;
+namespace backend.EFC;
 
 public interface IUserDao {
     public Task<User> AddUser(User user);
