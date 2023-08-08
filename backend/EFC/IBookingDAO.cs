@@ -1,8 +1,8 @@
-using frontend.Models;
+using backend.Models;
 
-namespace frontend.Contracts;
+namespace backend.EFC;
 
-interface IBookingService {
+public interface IBookingDao {
     public Task<Booking> AddBooking(Booking booking);
     public Task<List<Booking>> GetAllBookings();
     public Task<Booking> GetBookingById(int id);

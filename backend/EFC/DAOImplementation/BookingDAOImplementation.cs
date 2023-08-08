@@ -1,9 +1,8 @@
-using backend.Contracts;
 using backend.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.EFC.DAOImplementation;
-public class BookingDaoImplementation : IBookingService
+public class BookingDaoImplementation : IBookingDao
 
     {
         private readonly DbAccess _context;

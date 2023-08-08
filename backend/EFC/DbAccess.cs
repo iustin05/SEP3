@@ -5,8 +5,13 @@ namespace backend.EFC;
 
 public class DbAccess : DbContext
 {
-    public DbSet<Car>? Cars { get; set; }
-    public DbSet<Booking>? Bookings { get; set; }
-    public DbSet<User>? Users { get; set; }
-    public DbSet<Rating>? Ratings { get; set; }
+    public DbAccess(DbContextOptions<DbContext> options) : base(options)
+    {
+        
+    }
+
+    public required DbSet<Car> Cars { get; set; }
+    public required DbSet<Booking> Bookings { get; set; }
+    public required DbSet<User> Users { get; set; }
+    public required DbSet<Rating> Ratings { get; set; }
 }
