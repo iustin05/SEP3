@@ -1,32 +1,33 @@
-using Entities.Models;
+using backend.Contracts;
+using backend.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EFC.DAOImplementation;
-public class BookingDAOImplementation : IBookingService
+namespace backend.EFC.DAOImplementation;
+public class BookingDaoImplementation : IBookingService
 
     {
         private readonly DbAccess _context;
 
-        public BookingDAOImplementation(DbAccess context)
+        public BookingDaoImplementation(DbAccess context)
         {
             _context = context;
         }
 
         public async Task<Booking> AddBooking(Booking booking)
         {
-            await _context.Bookings.AddAsync(booking);
+            await _context.Bookings!.AddAsync(booking);
             await _context.SaveChangesAsync();
             return booking;
         }
 
         public async Task<List<Booking>> GetAllBookings()
         {
-            return await _context.Bookings.ToListAsync();
+            return await _context.Bookings!.ToListAsync() ?? throw new Exception("No bookings found");
         }
 
         public async Task<Booking> GetBookingById(int id)
         {
-            var booking = await _context.Bookings.FindAsync(id) ?? throw new Exception("Booking not found");
+            var booking = await _context.Bookings!.FindAsync(id) ?? throw new Exception("No bookings found");
             return booking;
         }
 
@@ -38,7 +39,7 @@ public class BookingDAOImplementation : IBookingService
 
         public async Task DeleteBooking(int id)
         {
-            var booking = await _context.Bookings.FindAsync(id) ?? throw new Exception("Booking not found");
+            var booking = await _context.Bookings!.FindAsync(id) ?? throw new Exception("Booking not found");
             _context.Bookings.Remove(booking);
             await _context.SaveChangesAsync();
         }

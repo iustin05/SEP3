@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace frontend.Models;
+namespace backend.Models;
 
 public class Car
 {
@@ -63,7 +63,7 @@ public class Car
 
     [Required]
     public required CarStatus Status { get; set; }
-
+        
     public Rating? Ratings { get; set; }
 
     [Required]

@@ -1,4 +1,6 @@
-using Entities.Models;
+using frontend.Models;
+
+namespace frontend.Contracts;
 
 interface ICarService {
     public Task<Car> AddCar(Car car);
