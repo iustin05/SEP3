@@ -21,6 +21,12 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+      - name: Compile Maven
+        run: mvn compile
+        working-directory: ./middleware
+      - name: Compile Proto
+        run: mvn protobuf:compile
+        working-directory: ./middleware
       - name: Run Tests
         run: mvn -B test
         working-directory: ./middleware
