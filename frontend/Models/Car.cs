@@ -63,8 +63,8 @@ public class Car
 
     [Required]
     public required CarStatus Status { get; set; }
-
-    public Rating? Ratings { get; set; }
+        
+    public List<Rating>? Ratings { get; set; }
 }
 
 public enum CarCategory

@@ -1,8 +1,8 @@
-using frontend.Models;
+using backend.Models;
 
-namespace frontend.Contracts;
+namespace backend.Contracts;
 
-interface ICarService {
+public interface ICarDao {
     public Task<Car> AddCar(Car car);
     public Task<List<Car>> GetAllCars();
     public Task<Car> GetCarById(int id);

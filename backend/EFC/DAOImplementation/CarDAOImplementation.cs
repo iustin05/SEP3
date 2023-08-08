@@ -3,7 +3,7 @@ using backend.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.EFC.DAOImplementation;
-public class CarDaoImplementation : ICarService
+public class CarDaoImplementation : ICarDao
     {
         private readonly DbAccess _context;
 

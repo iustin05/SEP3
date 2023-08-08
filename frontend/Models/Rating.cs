@@ -9,10 +9,6 @@ public class Rating
     public int Id { get; set; }
 
     [Required]
-    [ForeignKey(nameof(Car))]
-    public required int CarId { get; set; }
-
-    [Required]
     [ForeignKey(nameof(User))]
     public required int UserId { get; set; }
 
