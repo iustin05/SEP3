@@ -1,44 +1,44 @@
-using Entities.Models;
+using backend.Contracts;
+using backend.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace EFC.DAOImplementation;
+namespace backend.EFC.DAOImplementation;
 
-public class UserDAOImpl : IUserService {
+public class UserDaoImpl : IUserService {
     private readonly DbAccess _context;
 
-    public UserDAOImpl(DbAccess _context) {
-        this._context = _context;
+    public UserDaoImpl(DbAccess context) {
+        this._context = context;
     }
 
     public async Task<User> AddUser(User user) {
         Console.WriteLine("UserDAOImpl.AddUser");
-        Console.WriteLine(user.FirstName + " " + user.LastName + " " + user.Username + " " + user.Password);
-        await _context.Users.AddAsync(user);
+        Console.WriteLine(user.Name + " " + user.Password);
+        await _context.Users!.AddAsync(user);
         await _context.SaveChangesAsync();
         return user;
     }
 
-    public async Task<User?> GetUser(string username) {
-        User? user = await _context.Users.FirstOrDefaultAsync(t => t.Username.Equals(username)) ?? throw new Exception("Incorrect username");
+    public async Task<User?> GetUser(string email) {
+        User user = await _context.Users!.FirstOrDefaultAsync(t => t.Email.Equals(email)) ?? throw new Exception("Invalid email");
         return user;
     }
 
     async Task IUserService.DeleteUser(int id) {
-        User user = await _context.Users.FindAsync(id) ?? throw new Exception("User not found");
+        User user = await _context.Users!.FindAsync(id) ?? throw new Exception("User not found");
         _context.Users.Remove(user);
         await _context.SaveChangesAsync();
     }
 
     async Task<List<User>> IUserService.GetAllUsers()
     {
-        List<User> users = await _context.Users.ToListAsync() ?? throw new Exception("No users found");
+        List<User> users = await _context.Users!.ToListAsync() ?? throw new Exception("No users found");
         return users;
     }
 
     async Task<User> IUserService.GetUserById(int id)
     {
-        User user = await _context.Users.FindAsync(id) ?? throw new Exception("User not found");
+        User user = await _context.Users!.FindAsync(id) ?? throw new Exception("User not found");
         return user;
     }
 

@@ -1,4 +1,6 @@
-using Entities.Models;
+using backend.Models;
+
+namespace backend.Contracts;
 
 interface IBookingService {
     public Task<Booking> AddBooking(Booking booking);

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace frontend.Models;
+namespace backend.Models;
 
 public class Booking
 {

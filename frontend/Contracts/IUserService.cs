@@ -1,4 +1,6 @@
-using Entities.Models;
+using frontend.Models;
+
+namespace frontend.Contracts;
 
 interface IUserService {
     public Task<User> AddUser(User user);
