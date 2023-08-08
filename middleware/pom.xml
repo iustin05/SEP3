@@ -92,11 +92,11 @@
 				<version>0.6.1</version>
 				<configuration>
 					<protocArtifact>
-						com.google.protobuf:protoc:3.14.0:exe:{os.detected.classifier} <!-- osx-x86_64 for ARM (Replace) -->
+						com.google.protobuf:protoc:3.14.0:exe:${os.detected.classifier} <!-- osx-x86_64 for ARM (Replace) -->
 					</protocArtifact>
 					<pluginId>grpc-java</pluginId>
 					<pluginArtifact>
-						io.grpc:protoc-gen-grpc-java:1.4.0:exe:{os.detected.classifier} <!-- osx-x86_64 for ARM (Replace) -->
+						io.grpc:protoc-gen-grpc-java:1.4.0:exe:${os.detected.classifier} <!-- osx-x86_64 for ARM (Replace) -->
 					</pluginArtifact>
 				</configuration>
 				<executions>
