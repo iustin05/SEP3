@@ -1,7 +1,7 @@
-package iddleware.src.main.java.com.sep3group1.middleware.Controllers;
+package middleware.src.main.java.com.sep3group1.middleware.Controllers;
 
-import group6.semester.project.model.Car;
-import group6.semester.project.services.CarService;
+import group6.semester.project.Models.Car;
+import group6.semester.project.Services.CarService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

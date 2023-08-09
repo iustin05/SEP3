@@ -1,9 +1,6 @@
 package middleware.src.main.java.com.sep3group1.middleware.Services;
 
 import com.sep3group1.middleware.Models.Car;
-import com.sep3group1.middleware.Models.CarCategory;
-import com.sep3group1.middleware.Models.CarStatus;
-import com.sep3group1.middleware.Repositories.ICarDao;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
