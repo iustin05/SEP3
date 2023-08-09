@@ -1,9 +1,59 @@
 ﻿@page "/"
+@using frontend.Models
+@using frontend.Services
+@inject Services.MiddlewareService MiddlewareService
+@inject Services.UserService UserService
 
-<PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Cars List</h1>
 
-Welcome to your new app.
+<DatePickerModal @bind-IsOpen="_isModalOpen" OnConfirm="BookCarWithDates" />
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@if (_cars == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+        foreach (var car in _cars!)
+        {
+            <div>
+                <h3>@car.Make @car.Model</h3>
+                <p>Color: @car.Color</p>
+                <p>Fuel: @car.Fuel</p>
+                <p>Transmission: @car.Transmission</p>
+                <p>Price Per Day: @car.PricePerDay</p>
+                <button @onclick="() => BookCar(car.Id)">Book Car</button>
+            </div>
+        }
+}
+
+@code {
+    private List<Car>? _cars;
+    
+    private bool _isModalOpen = false;
+    private int _carId = 1;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _cars = await MiddlewareService.GetCarsAsync();
+    }
+
+    private async Task BookCar(int carId)
+    {
+        int? userId = await UserService.GetUserIdAsync();
+        this._carId = carId;
+        OpenModal();
+    }
+
+    private void OpenModal()
+    {
+        _isModalOpen = true;
+    }
+
+    private async Task BookCarWithDates(DatePickerModal.BookingDates dates)
+    {
+        var success = await MiddlewareService.BookCarAsync(_carId, dates.StartDate, dates.EndDate);
+        _isModalOpen = success && false;
+    }
+}
